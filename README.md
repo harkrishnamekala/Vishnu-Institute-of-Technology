@@ -1,2 +1,2 @@
 # Vishnu-Institute-of-Technology
-Entire College Code Library
+Code Contributed to My College
