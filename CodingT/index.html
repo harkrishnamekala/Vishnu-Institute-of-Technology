@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Home</title>
+<meta charset="utf-8">
+<meta name = "format-detection" content = "telephone=no" />
+<link rel="icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link rel="stylesheet" href="css/style.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery-migrate-1.1.1.js"></script>
+<script src="js/jquery.easing.1.3.js"></script>
+<script src="js/script.js"></script> 
+<script src="js/superfish.js"></script>
+<script src="js/jquery.equalheights.js"></script>
+<script src="js/jquery.mobilemenu.js"></script>
+<script src="js/tmStickUp.js"></script>
+<script src="js/jquery.ui.totop.js"></script>
+<script src="js/jquery.shuffle-images.js"></script>
+<script>
+ $(window).load(function(){
+  $().UItoTop({ easingType: 'easeOutQuart' });
+  $('#stuck_container').tmStickUp({});  
+ }); 
+
+ $(document).ready(function(){
+       $(".shuffle-me").shuffleImages({
+         target: ".images > img"
+       });
+    });
+
+</script>
+<!--[if lt IE 8]>
+ <div style=' clear: both; text-align:center; position: relative;'>
+   <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+     <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+   </a>
+</div>
+<![endif]-->
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<link rel="stylesheet" media="screen" href="css/ie.css">
+<![endif]-->
+</head>
+
+<body class="page1" id="top">
+<!--==============================
+              header
+=================================-->
+<header>
+  <div class="header_top">
+    <div class="container">
+      <div class="row">
+        <div class="grid_12">
+          <h1><a href="#">Coding Tourney</a></h1>
+          #valiant2k17
+        </div>
+      </div>
+    </div>
+  </div>
+  <section id="stuck_container">
+  <!--==============================
+              Stuck menu
+  =================================-->
+    <div class="container">
+      <div class="row">
+        <div class="grid_12 ">
+          <h1 class="logo">
+            <a href="index.html">
+				CodingTourney
+            </a>
+          </h1>
+          <div class="navigation ">
+            <nav>
+              <ul class="sf-menu">
+               <li class="current"><a href="index.html">Home</a></li>
+               <li><a href="test.php">LeaderBoard</a></li>
+             </ul>
+            </nav>
+            <div class="clear"></div>
+          </div>       
+         <div class="clear"></div>  
+        </div>
+     </div> 
+    </div> 
+  </section>
+</header>
+<!--=====================
+          Content
+======================-->
+<section id="content">
+  <div class="container">
+    <div class="row">
+      <div class="grid_12">
+        <h2 class="ta__center">Starts In</h2>
+		<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Feb 22, 2017 9:00:00").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+    // Get todays date and time
+    var now = new Date().getTime();
+    
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+    
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Output the result in an element with id="demo"
+    document.getElementById("demo").innerHTML = days + "D " + hours + "H "
+    + minutes + "M " + seconds + "S ";
+    
+    // If the count down is over, write some text 
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("demo").innerHTML = "Started Rush up soon";
+    }
+}, 1000);
+</script>
+<style>
+p1 {
+  text-align: center;
+  font-size: 60px;
+}
+</style>
+		<p style="color:green;font-size:300%;text-align:center;"  id="demo"></p1>
+  <div class="sep-1"></div>
+  <div class="container">
+    <div class="row">
+      <div class="grid_8">
+		<h2>Prizes</h2>
+		<div class="extra_wrapper"><p style="font-size:150%;">Winner will be awarded with Winning certificate,Trophys,T-Shirts and Cash prize </br></br>Runner will be awarded with Runner certificate,Trophys,T-Shirts and Cash prize<br></br>All the participants will get participant certificate</div>
+        <h2>Rules</h2>
+       <p style="font-size:150%;">->Each team can contain atmost two participants.</p><p style="font-size:150%;">->Participant should are not allowed to use any external resources,malpractice will lead to disqualification.</p><p style="font-size:150%;">->Every participant  should carry their college ID card.</p>
+<p style="font-size:150%;">->The Event Organisers have the right to change any rules mentioned above based environmental conditions.</p>
+<p style="font-size:150%;">->All the decisions made by the Coordinators are Final.</p>
+  </div>
+</section>
+<!--==============================
+              footer
+=================================-->
+<footer id="footer">
+  <div class="container">
+    <div class="row">
+      <div class="grid_12"> 
+        <h2>Contacts</h2>
+        <div class="footer_phone">+91 93966 15888</div>
+        <a href="#" class="footer_mail"> valiant_cseit@vishnu.edu.in</a>
+        <div class="sub-copy">Website designed by Organisers of CodingTourney</a></div>
+      </div>
+    </div>
+
+  </div>  
+</footer>
+<a href="#" id="toTop" class="fa fa-chevron-up"></a>
+</body>
+</html>
+

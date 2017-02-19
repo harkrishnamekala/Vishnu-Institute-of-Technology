@@ -1,0 +1,28 @@
+{
+  "name": "valiant2k17",
+  "version": "1.0.0",
+  "description": "A chatbot to help students to know where are events are held",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harkrishnamekala/Valiant2K17.git"
+  },
+  "keywords": [
+    "Chatbot",
+    "Valiant",
+    "Vishnu"
+  ],
+  "author": "Harikrishna Mekala",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harkrishnamekala/Valiant2K17/issues"
+  },
+  "homepage": "https://github.com/harkrishnamekala/Valiant2K17#readme",
+  "dependencies": {
+    "botbuilder": "^3.6.0",
+    "restify": "^4.3.0"
+  }
+}
