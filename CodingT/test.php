@@ -1,20 +1,19 @@
 <?php
-$round = 0;
 if(isset($_GET['round'])){
-   $round  = $_GET['round'];
+  $round = $_GET['round'];
+  $table_name = "Round" . $round;
+
+  $get_match_pairs = mysqli_query($conn,"SELECT roundid,tidone,tidtwo FROM '$table_name' ");
+
+
+  $get_max_round = mysqli_query($conn,"SELECT COUNT(*) AS pair_count FROM '$table_name'");
+
+  $max_count_arr = mysqli_fetch_assoc($get_max_round);
+
+  $max_pairs = $max_count_arr['pair_count'];
+
+
 }
-require "connect.php";
-
-$wins = $round -1;
-
-$queryResult = mysqli_query($conn, "SELECT COUNT(*) AS heads FROM details WHERE wins = $wins");
-
-$numberHeadarr = mysqli_fetch_assoc($queryResult);
-
-$teams = $numberHeadarr['heads'];
-
-$getidandTeamName = mysqli_query($conn,"SELECT max(tid) AS tid_max,min(tid) AS tid_min FROM details WHERE wins = $wins ");
-
 ?>
 
 <!DOCTYPE html>
@@ -38,23 +37,34 @@ $getidandTeamName = mysqli_query($conn,"SELECT max(tid) AS tid_max,min(tid) AS t
     <h1 style="font-size: 36px;color: white">Coding Tourney</h1>
   </header>
       <?php 
-      $idName_arr = mysqli_fetch_assoc($getidandTeamName);
-      $tid_maxi = $idName_arr['tid_max'];
-      $tid_mini = $idName_arr['tid_min'];
 
-      $no_of_teams_query = mysqli_query($conn,"SELECT cfightsid,tname,tid FROM details WHERE wins = $wins");
+        $get_all_rounds = mysqli_query($conn,"SELECT roundid,tidone,tidtwo, FROM details");
 
-      while($tid_mini<$tid_maxi){
+      for($i=0;$i<$max_pairs;$i++){
 
-          $fetech_chicken_team_arr = mysqli_fetch_assoc($no_of_teams_query);
+          $round_arr = mysqli_fetch_assoc($get_all_rounds);
 
-          $fetech_mutton_team_arr = mysqli_fetch_assoc($no_of_teams_query);
+          $tid1 = $round_arr['tidone'];
+
+          $tid2 = $round_arr['tidtwo'];
+
+
+          $get_id_based_on_round_chicken = mysqli_query($conn,"SELECT cfightsid,tname FROM details WHERE tid = $tid1");
+          $get_id_based_on_round_mutton  = mysqli_query($conn,"SELECT cfightsid,tname FROM details WHERE tid = $tid2");
+
+          $fetech_chicken_team_arr = mysqli_fetch_assoc($get_id_based_on_round_chicken);
+
+          $fetech_mutton_team_arr = mysqli_fetch_assoc($get_id_based_on_round_mutton);
+          
+
 
           $cfightsid_chicken_team_1 = $fetech_chicken_team_arr['cfightsid'];
           $cfightsid_mutton_team_2 = $fetech_mutton_team_arr['cfightsid'];
 
           $tname_chicken_team_1 = $fetech_chicken_team_arr['tname'];
           $tname_mutton_team_2 = $fetech_mutton_team_arr['tname'];
+
+
 
 
       ?>
@@ -83,7 +93,7 @@ $getidandTeamName = mysqli_query($conn,"SELECT max(tid) AS tid_max,min(tid) AS t
         </div>
 
       </div>
-      <?php $tid_mini += 2; } ?>
+      <?php } ?>
      
 </body>
 </html>
