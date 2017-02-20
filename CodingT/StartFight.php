@@ -2,15 +2,16 @@
  if (isset($_POST['round'])) {
  	$round_number = $_POST['round'];
 
- 	$round_name = "Round" . $round_number;
+ 	$round_name = "round" . $round_number;
  	
  	require 'connect.php';
 
- 	$TableCreate = mysqli_query($conn,"CREATE TABLE '$round_name' (roundid INT(255) NOT NULL AUTO_INCREMENT,
+ 	$TableCreate = mysqli_query($conn,"CREATE TABLE $round_name (
+ 		roundid INT(255) AUTO_INCREMENT,
  		tidone INT(255),
  		tidtwo INT(255), 
  		winner INT(255) DEFAULT 0,
- 		PRIMARY KEY(roundid) ");
+ 		PRIMARY KEY(roundid)) ");
  	//TODO: Check if the previous Round Exists in the unit test
 
  	$get_individual_count = mysqli_query($conn,"SELECT COUNT(*) AS tid_max FROM details");
@@ -29,10 +30,10 @@
 
  		$chicken_team_id = $chicken_team['tid'];
  		$mutton_team_id = $mutton_team['tid'];
- 		$insert_team_pairs = mysql_query($conn,"INSERT INTO '$round_name' (tidone,tidtwo) VALUES ($chicken_team_id,$mutton_team_id)" );
+ 		$insert_team_pairs = mysqli_query($conn,"INSERT INTO $round_name (tidone,tidtwo) VALUES ($chicken_team_id,$mutton_team_id)" );
 
  	}
- 	header('Location: test.php?round=$round_number');
+ 	header('Location: test.php?round=' . $round_number);
  }
 ?>
 <!DOCTYPE html>
@@ -42,7 +43,7 @@
 </head>
 <body>
 <h1 style="text-align: center">Round Starter</h1>
-<form action="StartFight.php" action="POST">
+<form action="StartFight.php" method="POST">
 	<label>Enter The Round  :</label>
 	<input type="text" name="round"/>
 	<br>

@@ -1,12 +1,15 @@
 <?php
+global $table_name;
+global $round;
 if(isset($_GET['round'])){
   $round = $_GET['round'];
-  $table_name = "Round" . $round;
+  $GLOBALS['round'] = $round;
+  $table_name = "round" . $round;
+  require 'connect.php';
+  $get_match_pairs = mysqli_query($conn,"SELECT roundid,tidone,tidtwo FROM $table_name ");
 
-  $get_match_pairs = mysqli_query($conn,"SELECT roundid,tidone,tidtwo FROM '$table_name' ");
 
-
-  $get_max_round = mysqli_query($conn,"SELECT COUNT(*) AS pair_count FROM '$table_name'");
+  $get_max_round = mysqli_query($conn,"SELECT COUNT(*) AS pair_count FROM $table_name ");
 
   $max_count_arr = mysqli_fetch_assoc($get_max_round);
 
@@ -37,8 +40,24 @@ if(isset($_GET['round'])){
     <h1 style="font-size: 36px;color: white">Coding Tourney</h1>
   </header>
       <?php 
+        require 'connect.php';
+        $get_all_rounds = mysqli_query($conn,"SELECT roundid,tidone,tidtwo FROM $table_name");
 
-        $get_all_rounds = mysqli_query($conn,"SELECT roundid,tidone,tidtwo, FROM details");
+
+         function Check_winner($tid){
+          require 'connect.php';
+          $check_if_winner = mysqli_query($conn,"SELECT wins FROM details WHERE tid = $tid");
+
+          $win_arr = mysqli_fetch_assoc($check_if_winner);
+
+          $wins = $win_arr['wins'];
+
+          $round = $_GET['round'];
+
+          if($round == $wins) return true;
+          
+          else return false;
+        }
 
       for($i=0;$i<$max_pairs;$i++){
 
@@ -55,7 +74,7 @@ if(isset($_GET['round'])){
           $fetech_chicken_team_arr = mysqli_fetch_assoc($get_id_based_on_round_chicken);
 
           $fetech_mutton_team_arr = mysqli_fetch_assoc($get_id_based_on_round_mutton);
-          
+
 
 
           $cfightsid_chicken_team_1 = $fetech_chicken_team_arr['cfightsid'];
@@ -82,9 +101,14 @@ if(isset($_GET['round'])){
               </p>
               <div class="rca-top-padding">
                 <div class="rca-teams rca-table">
-                  <div class="team rca-cell" style="color: white" style="color: white;font-size: 24px" ><b><?php echo $tname_chicken_team_1; ?></b></div>
+
+                  <div class="team rca-cell" style="<?php if(Check_winner($tid1)) echo "color: green;font-size: 24px";
+                  else echo "color: white;font-size: 24px";  ?>" ><b><?php echo $tname_chicken_team_1; ?></b></div>
+                
                   <div class="rca-vs rca-cell"></div>
-                  <div class="team rca-cell" style="color: white;font-size: 24px" ><b><?php echo $tname_mutton_team_2; ?></b></div>
+
+                  <div class="team rca-cell" style="<?php if(Check_winner($tid2)) echo "color: green;font-size: 24px";
+                  else echo "color: white;font-size: 24px";  ?>" ><b><?php echo $tname_mutton_team_2; ?></b></div>
                 </div>
               </div>
               </div>
