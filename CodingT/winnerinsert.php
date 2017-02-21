@@ -13,11 +13,11 @@ if (isset($_POST['cfightsid'])) {
 	$tid = $tid_arr['tid'];
 	$table_name = "Round" . $round;
 	$update_the_rounds = mysqli_query($conn,"UPDATE $table_name SET winner=$tid WHERE tidone = $tid OR tidtwo = $tid");
-	$get_exiting_wins = mysqli_query($conn,"SELECT tid FROM details WHERE tid = $tid");
+	$get_exiting_wins = mysqli_query($conn,"SELECT wins FROM details WHERE tid = $tid");
 
 	$get_tid_arr = mysqli_fetch_assoc($get_exiting_wins);
 
-	$wins = $get_tid_arr['tid'];
+	$wins = $get_tid_arr['wins'];
 	$wins += 1;
 
 	$update_details = mysqli_query($conn,"UPDATE details SET wins=$wins WHERE tid = $tid");
